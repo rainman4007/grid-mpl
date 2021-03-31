@@ -47,7 +47,7 @@ class MPLManager implements Serializable {
   }
 
   /** List of paths which is used to find modules in libraries */
-  private List modulesLoadPaths = ['com/griddynamics/devops/mpl']
+  private List modulesLoadPaths = ['com/griddynamics/devops/mpl','com/triv/devops/mpl']
 
   /** Pipeline configuration */
   private Map config = [:]
@@ -66,6 +66,9 @@ class MPLManager implements Serializable {
 
   /** List of modules available on project side while enforcement */
   private List enforcedModules = []
+
+  /** List of currently executed modules */
+  private List activeModules = []
 
   /**
    * Initialization for the MPL manager
@@ -272,12 +275,8 @@ class MPLManager implements Serializable {
    *               better to switch to Helper.getMPLBlocks() - it gives more
    *               info about the currently executed modules
    */
-  @Deprecated // https://github.com/griddynamics/mpl/issues/54
   public List getActiveModules() {
-    def blocks = Helper.getMPLBlocks()
-    for( def i = 0; i < blocks.size(); i++ )
-      blocks[i] = blocks[i].module
-    return blocks.reverse()
+    activeModules
   }
 
   /**
@@ -288,7 +287,7 @@ class MPLManager implements Serializable {
    * @return  String the created block id
    */
   public String pushActiveModule(String path) {
-    return Helper.startMPLBlock(path)
+        activeModules += path
   }
 
   /**
@@ -296,8 +295,8 @@ class MPLManager implements Serializable {
    *
    * @param start_id  start node ID to find in the current execution
    */
-  public void popActiveModule(String start_id) {
-    Helper.endMPLBlock(start_id)
+  public void popActiveModule() {
+    activeModules.pop()
   }
 
   /**
