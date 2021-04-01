@@ -100,7 +100,8 @@ class MPLManager implements Serializable {
    * @return  Overriden configuration for the specified module
    */
   public MPLConfig moduleConfig(String name) {
-    MPLConfig.create(config.modules ? Helper.mergeMaps(config.subMap(config.keySet()-'modules'), (config.modules[name] ?: [:])) : config)
+    //MPLConfig.create(config.modules ? Helper.mergeMaps(config.subMap(config.keySet()-'modules'), (config.modules[name] ?: [:])) : config)
+    config.modules ? Helper.mergeMaps(config.subMap(config.keySet()-'modules'), (config.modules[name] ?: [:])) : [:]
   }
 
   /**

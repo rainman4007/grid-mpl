@@ -65,5 +65,6 @@ def call(body, Map defaults = [:], Map overrides = [:]) {
   Helper.mergeMaps(config, overrides)
 
   // Init the MPL Pipeline
+  print("config "+ config)
   MPLManager.instance.init(config)
 }
