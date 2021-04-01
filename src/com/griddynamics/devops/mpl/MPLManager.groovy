@@ -92,6 +92,14 @@ class MPLManager implements Serializable {
   }
 
   /**
+   * Get modules list from the specific config option
+   *
+   * @return  List modules
+   */
+  public String getModules() {
+    config.modules.keySet() as List
+  }
+  /**
    * Get a module configuration
    * Module config is a pipeline config without modules section and with overrided values from the module itself.
    *
