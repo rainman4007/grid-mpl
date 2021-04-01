@@ -96,8 +96,8 @@ def call(String name = env.STAGE_NAME, cfg = null) {
     throw newex
   }
   finally {
-    MPLManager.instance.modulePostStepsRun()
-    def errors = MPLManager.instance.getPostStepsErrors()
+    MPLManager.instance.modulePostStepsRun(module_path)
+    def errors = MPLManager.instance.getPostStepsErrors(module_path)
     if( errors ) {
       for( def e in errors )
         println "Module '${name}' got error during execution of poststep from module '${e.module}': ${e.error}"
