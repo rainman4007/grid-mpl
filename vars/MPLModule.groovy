@@ -105,7 +105,7 @@ def call(String name = env.STAGE_NAME, cfg = null) {
       newex.setStackTrace(Helper.getModuleStack(newex))
       throw newex
     }
-    MPLManager.instance.popActiveModule(block_id)
+    MPLManager.instance.popActiveModule()
   }
 
   return out
