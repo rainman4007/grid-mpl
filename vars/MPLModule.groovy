@@ -45,10 +45,6 @@ import org.jenkinsci.plugins.workflow.steps.FlowInterruptedException
 def call(String name = env.STAGE_NAME, cfg = null) {
   if( cfg == null )
     cfg = MPLManager.instance.moduleConfig(name)
-  else if( cfg instanceof MPLConfig )
-    cfg = cfg.clone()
-  else
-    cfg = MPLConfig.create(cfg)
   
   // Trace of the running modules to find loops
   // Also to make ability to use lib module from overridden one
